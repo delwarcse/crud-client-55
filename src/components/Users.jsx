@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const Users = () => {
     const loadedUsers = useLoaderData();
@@ -21,24 +21,6 @@ const Users = () => {
                 }
             })
     }
-//option 2
-//     const handleDelete = (_id) => {
-//   console.log('delete', _id);
-//   fetch(`http://localhost:5000/users/${_id}`, {
-//     method: 'DELETE'
-//   })
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log(data);
-//       if (data.success) {
-//         alert("User deleted!");
-//         // optionally: state থেকে user remove করে UI update করো
-//       } else {
-//         alert("Failed to delete!");
-//       }
-//     });
-// };
-
 
     return (
         <div>
@@ -47,6 +29,7 @@ const Users = () => {
                 {
                     users.map(user => <p key={user._id} user={user}>
                         {user.name}: {user.email}
+                        <Link to={`/update/${user._id}`}><button>Update</button></Link>
                         <button onClick={() => handleDelete(user._id)}>
                             X</button></p>)
                 }
